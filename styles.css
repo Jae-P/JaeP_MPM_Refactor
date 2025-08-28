@@ -231,7 +231,7 @@ body.layout-dashboard .side-nav{display:none}
 }
 
 #loadingScreen img {
-  width: 480px;
+  width: 380px;
   height: auto;
   animation: pulse 5.5s infinite;
 }
