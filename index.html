@@ -1,11 +1,14 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Music Publishing Management App™</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+  <!-- Fonts: Inter for UI, Playfair Display for headings -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -13,6 +16,7 @@
   <div id="loadingScreen">
     <img src="assets/MPM_APP_Logo1.png" alt="MPM Logo" />
   </div>
+
   <div class="app">
     <aside class="side-nav" aria-label="Primary">
       <div class="brand">
@@ -22,6 +26,7 @@
           <div class="brand-sub">By Jae-P™</div>
         </div>
       </div>
+
       <nav class="nav">
         <button class="nav-item active" data-target="menu" title="Main Menu"><span class="icon">🏠</span><span class="label">Home</span></button>
         <button class="nav-item" data-target="profile" title="Profile"><span class="icon">👤</span><span class="label">Profile</span></button>
@@ -36,6 +41,7 @@
         <button class="nav-item" data-target="marketing" title="Marketing"><span class="icon">📣</span><span class="label">Marketing</span></button>
         <button class="nav-item" data-target="consultation" title="Consultation"><span class="icon">💬</span><span class="label">Consult</span></button>
       </nav>
+
       <footer class="side-footer">
         <small>© <span id="year"></span> Music Publishing Management APP By Jae-P™</small>
       </footer>
@@ -49,6 +55,7 @@
         </div>
       </header>
 
+      <!-- MAIN MENU -->
       <section id="menu" class="panel active">
         <div class="home-grid">
           <div class="home-card">
@@ -59,7 +66,8 @@
             </div>
             <button class="btn outline" data-target="checklist">Go to Checklist →</button>
           </div>
-          <button class="card" data-target="profile"><div class="card-icon">👤</div><h3>Profile</h3><p>Update your info, preferences, and portfolio.</p></button>
+
+          <button class="card" data-target="profile"><div class="card-icon">👤</div><h3>Profile</h3><p>Update your info, social links & portfolio.</p></button>
           <button class="card" data-target="checklist"><div class="card-icon">✅</div><h3>Release Checklist</h3><p>All tasks to finish before you drop a song.</p></button>
           <button class="card" data-target="publishing"><div class="card-icon">🏢</div><h3>Publishing Company</h3><p>Form your entity & register properly.</p></button>
           <button class="card" data-target="copyright"><div class="card-icon">©️</div><h3>Copyright</h3><p>Register your work with the U.S. Copyright Office.</p></button>
@@ -73,48 +81,131 @@
         </div>
       </section>
 
+      <!-- PROFILE -->
       <section id="profile" class="panel">
-        <div class="profile-wrap">
-          <div class="profile-card glass">
-            <div class="avatar" aria-hidden="true">
-              <img id="profileImage" src="https://via.placeholder.com/150" alt="Profile Picture" />
+        <div class="profile-wrap professional">
+          <!-- Left: header / preview -->
+          <div class="profile-left glass">
+            <div class="avatar">
+              <img id="profileImage" src="https://via.placeholder.com/300" alt="Profile Picture" />
               <label for="profileUpload" class="upload-btn">📷 Upload</label>
               <input type="file" id="profileUpload" accept="image/*" style="display:none;" />
             </div>
-            <h2>Profile settings</h2>
-            <ul class="profile-list">
-              <li>Personal info</li>
-              <li>Privacy & security</li>
-              <li>Preferences</li>
-              <li>Notifications</li>
-            </ul>
+
+            <h2 id="artistName">Jae-P™</h2>
+            <p id="profileHeadline" class="muted">Hip Hop Artist · Producer · Songwriter</p>
+
+            <div class="profile-stats">
+              <div><strong id="profileFollowers">—</strong><span>Followers</span></div>
+              <div><strong id="profileStreams">—</strong><span>Streams</span></div>
+              <div><strong id="profileReleasesCount">—</strong><span>Releases</span></div>
+            </div>
+
+            <div class="profile-socials" id="profileSocialsPreview"></div>
+
             <div class="profile-actions">
-              <a class="btn subtle" href="#" role="button">Edit profile</a>
-              <a class="btn primary" href="#" role="button">View portfolio</a>
+              <button class="btn primary" id="editProfileBtn">Edit profile</button>
+              <button class="btn subtle" id="viewPortfolioBtn">View portfolio</button>
+              <button class="btn subtle" id="shareProfileBtn">Share / Download EPK</button>
             </div>
           </div>
-          <div class="info-card">
+
+          <!-- Right: editable fields (disabled by default) -->
+          <div class="profile-right glass" id="profileEditCard">
             <h3>Account</h3>
             <div class="info-grid">
-              <label>Stage name</label><input id="stageName" placeholder="Jae-P" />
-              <label>Email</label><input id="email" type="email" placeholder="you@example.com" />
-              <label>Website</label><input id="website" type="url" placeholder="https://"/>
+              <label>Stage name</label>
+              <input id="stageName" placeholder="Jae-P" disabled />
+              <label>Email</label>
+              <input id="email" type="email" placeholder="you@example.com" disabled />
+              <label>Website</label>
+              <input id="website" type="url" placeholder="https://" disabled />
               <label>Timezone</label>
-              <select id="timezone">
+              <select id="timezone" disabled>
                 <option value="PT">PT (Pacific)</option>
                 <option value="MT">MT (Mountain)</option>
                 <option value="CT">CT (Central)</option>
                 <option value="ET">ET (Eastern)</option>
               </select>
+
+              <label>Genre / Tagline</label>
+              <input id="genre" placeholder="Hip Hop, Pop, R&B..." disabled />
+              <label>Bio</label>
+              <textarea id="bio" placeholder="Tell your story..." disabled></textarea>
+
+              <label>Spotify</label>
+              <input id="spotify" placeholder="Spotify URL" disabled />
+              <label>Apple Music</label>
+              <input id="apple" placeholder="Apple Music URL" disabled />
+              <label>YouTube</label>
+              <input id="youtube" placeholder="YouTube URL" disabled />
+              <label>Instagram</label>
+              <input id="instagram" placeholder="Instagram URL" disabled />
+              <label>TikTok</label>
+              <input id="tiktok" placeholder="TikTok URL" disabled />
+              <label>Facebook</label>
+              <input id="facebook" placeholder="Facebook URL" disabled />
+
+              <label>Followers</label>
+              <input id="followers" type="number" min="0" step="1" placeholder="0" disabled />
+              <label>Streams</label>
+              <input id="streams" type="number" min="0" step="1" placeholder="0" disabled />
+              <label>Releases</label>
+              <input id="releases" type="number" min="0" step="1" placeholder="0" disabled />
             </div>
+
             <div class="profile-actions">
               <button class="btn primary" id="saveProfile">Save</button>
+              <button class="btn subtle cancelEdit" id="cancelEditBtn">Cancel edit</button>
               <button class="btn subtle back">Back to Menu</button>
             </div>
           </div>
         </div>
       </section>
 
+      <!-- PORTFOLIO -->
+      <section id="portfolio" class="panel">
+        <h2>Portfolio</h2>
+        <p class="muted">Add your releases, videos, and EPK links here. These items will appear in your profile and in the EPK PDF.</p>
+
+        <div class="portfolio-grid">
+          <div class="portfolio-column">
+            <h3>Releases</h3>
+            <div class="portfolio-form">
+              <input id="releaseTitle" placeholder="Release title" />
+              <input id="releaseLink" placeholder="Release link (optional)" />
+              <button class="btn" id="addReleaseBtn">Add Release</button>
+            </div>
+            <div id="releaseList" class="portfolio-list"></div>
+          </div>
+
+          <div class="portfolio-column">
+            <h3>Videos</h3>
+            <div class="portfolio-form">
+              <input id="videoTitle" placeholder="Video title (optional)" />
+              <input id="videoLink" placeholder="Video link (YouTube/Vimeo)"/>
+              <button class="btn" id="addVideoBtn">Add Video</button>
+            </div>
+            <div id="videoList" class="portfolio-list"></div>
+          </div>
+
+          <div class="portfolio-column">
+            <h3>EPK Links</h3>
+            <div class="portfolio-form">
+              <input id="epkTitle" placeholder="EPK title (e.g., Press Kit 2024)" />
+              <input id="epkLink" placeholder="EPK link (PDF/URL)" />
+              <button class="btn" id="addEpkBtn">Add EPK</button>
+            </div>
+            <div id="epkList" class="portfolio-list"></div>
+          </div>
+        </div>
+
+        <div class="panel-actions">
+          <button class="btn subtle back">Back to Menu</button>
+        </div>
+      </section>
+
+      <!-- CHECKLIST -->
       <section id="checklist" class="panel">
         <div class="section-header">
           <h2>Music Release Checklist</h2>
@@ -123,33 +214,60 @@
             <div class="progress-label small"><span id="progressCount2">0</span> of <span id="progressTotal2">0</span></div>
           </div>
         </div>
+
         <div class="add-task">
           <input id="newTaskInput" placeholder="Add custom task..." />
           <button id="addTaskBtn" class="btn">Add</button>
         </div>
+
         <div id="checklistList" class="list"></div>
+
         <div class="panel-actions">
           <button class="btn subtle back">Back to Menu</button>
         </div>
       </section>
 
+      <!-- PUBLISHING (upgraded cards + links) -->
       <section id="publishing" class="panel">
         <h2>Publishing Company Setup</h2>
+
+        <div class="cards grid-3 info-cards">
+          <div class="info-card-2">
+            <h3>Why set up a Publisher?</h3>
+            <p>Own/control your catalog, collect the <strong>publisher’s share</strong> of royalties, and license your songs for sync.</p>
+          </div>
+          <div class="info-card-2">
+            <h3>Business Structure</h3>
+            <p>Start as a DBA or form an <strong>LLC</strong> for liability protection and clean banking/taxes.</p>
+          </div>
+          <div class="info-card-2">
+            <h3>Royalties Overview</h3>
+            <p>Performance (PRO), Mechanical (HFA/Music Reports), and Sync (direct licenses). Make sure each lane is covered.</p>
+          </div>
+        </div>
+
         <ol class="steps">
-          <li>Choose 2–3 name options (PROs often ask for alternates).</li>
+          <li>Choose 2–3 name options for your publishing company (PROs ask for alternates).</li>
           <li>Register your business (DBA, LLC, or Corporation) with your state.</li>
           <li>Get an EIN from the IRS.</li>
           <li>Open a dedicated business bank account.</li>
         </ol>
-        <div class="links">
-          <a target="_blank" href="https://www.irs.gov/businesses/small-businesses-self-employed/employer-id-numbers">Get an EIN (IRS)</a>
-          <a target="_blank" href="https://www.sba.gov/business-guide/launch-your-business">State & local registration guide (SBA)</a>
+
+        <div class="btn-grid">
+          <a target="_blank" href="https://www.irs.gov/businesses/small-businesses-self-employed/employer-id-numbers" class="btn btn-highlight">Get an EIN (IRS)</a>
+          <a target="_blank" href="https://www.sba.gov/business-guide/launch-your-business" class="btn btn-highlight">State & Local Registration (SBA)</a>
+          <a href="https://www.bmi.com/join" target="_blank" class="btn btn-highlight">Join BMI (Writer & Publisher)</a>
+          <a href="https://www.ascap.com/join" target="_blank" class="btn btn-highlight">Join ASCAP (Writer & Publisher)</a>
+          <a href="https://www.musicreports.com/" target="_blank" class="btn">Music Reports</a>
+          <a href="https://www.harryfox.com/" target="_blank" class="btn">Harry Fox Agency</a>
         </div>
+
         <div class="panel-actions">
           <button class="btn subtle back">Back to Menu</button>
         </div>
       </section>
 
+      <!-- COPYRIGHT -->
       <section id="copyright" class="panel">
         <h2>Copyright Registration</h2>
         <p>Protect your work by registering your song or album.</p>
@@ -161,18 +279,50 @@
         </div>
       </section>
 
+      <!-- PRO (upgraded cards + links) -->
       <section id="pro" class="panel">
         <h2>Performance Rights Organizations (PROs)</h2>
-        <div class="links two-col">
-          <a href="https://www.bmi.com/join" target="_blank">Join BMI (writer & publisher)</a>
-          <a href="https://www.ascap.com/join" target="_blank">Join ASCAP (writer & publisher)</a>
 
+        <div class="cards grid-3 info-cards">
+          <div class="info-card-2">
+            <h3>What’s a PRO?</h3>
+            <p>PROs (BMI/ASCAP) collect <strong>performance royalties</strong> when your music is publicly played (radio, live, TV, streaming).</p>
+          </div>
+          <div class="info-card-2">
+            <h3>Writer vs Publisher</h3>
+            <p>Open both accounts: the <strong>writer share</strong> pays you as a songwriter; the <strong>publisher share</strong> pays your company.</p>
+          </div>
+          <div class="info-card-2">
+            <h3>IPI/CAE Number</h3>
+            <p>Once joined, you’ll receive an IPI/CAE identifier. Use it on all work registrations to ensure correct payment.</p>
+          </div>
+        </div>
+
+        <div class="cards grid-3">
+          <div class="step-card">
+            <h4>1) Create Accounts</h4>
+            <p>Make both a <strong>Writer</strong> and a <strong>Publisher</strong> account. Keep logins safe.</p>
+          </div>
+          <div class="step-card">
+            <h4>2) Register Works</h4>
+            <p>Register each song with accurate splits, ISWC if available, and correct contributors.</p>
+          </div>
+          <div class="step-card">
+            <h4>3) Ongoing Updates</h4>
+            <p>Update new releases, new collaborators, set lists for live shows, and cue sheets if applicable.</p>
+          </div>
+        </div>
+
+        <div class="cards grid-2">
+          <a class="link-card" href="https://www.bmi.com/join" target="_blank">Join BMI</a>
+          <a class="link-card" href="https://www.ascap.com/join" target="_blank">Join ASCAP</a>
         </div>
         <div class="panel-actions">
           <button class="btn subtle back">Back to Menu</button>
         </div>
       </section>
 
+      <!-- DISTRIBUTION -->
       <section id="distribution" class="panel">
         <h2>Distribution Platforms</h2>
         <div class="cards grid-2">
@@ -187,6 +337,7 @@
         </div>
       </section>
 
+      <!-- FREELANCE -->
       <section id="freelance" class="panel">
         <h2>Freelance & Services</h2>
         <div class="cards grid-2">
@@ -201,6 +352,7 @@
         </div>
       </section>
 
+      <!-- ROYALTIES -->
       <section id="royalties" class="panel">
         <h2>Royalty Collection & Publishing Administration</h2>
         <div class="cards grid-2">
@@ -212,6 +364,7 @@
         </div>
       </section>
 
+      <!-- CONTRACTS -->
       <section id="contracts" class="panel">
         <h2>Contracts & Agreements</h2>
         <p>Draft collaboration agreements, producer agreements, and writer split sheets.</p>
@@ -223,6 +376,7 @@
         </div>
       </section>
 
+      <!-- MARKETING -->
       <section id="marketing" class="panel">
         <h2>Marketing & Promotion</h2>
         <div class="cards grid-3">
@@ -243,44 +397,70 @@
 
       <!-- CONSULTATION -->
       <section id="consultation" class="panel">
-        <h2>Premium Consultation – Talk to Jae-P™</h2>
-        <form id="consultForm" class="form">
-          <div class="form-row">
-            <label>Name</label>
-            <input required placeholder="Full name" name="name" />
+        <div class="consult-card glass">
+          <h2>💬 Premium Consultation – Talk to Jae-P™</h2>
+          <p class="muted">Book your 1-on-1 call. Select platform, time, and confirm your rate.</p>
+
+          <form id="consultForm" class="consult-form">
+            <div class="form-grid">
+              <div class="form-row">
+                <label for="consultName">Name</label>
+                <input id="consultName" required placeholder="Full name" name="name" />
+              </div>
+              <div class="form-row">
+                <label for="consultEmail">Email</label>
+                <input id="consultEmail" required type="email" placeholder="you@example.com" name="email" />
+              </div>
+              <div class="form-row">
+                <label for="consultPlatform">Preferred Platform</label>
+                <select id="consultPlatform" name="platform">
+                  <option>FaceTime</option>
+                  <option>Zoom</option>
+                  <option>Google Meet</option>
+                  <option>Phone</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="form-row">
+                <label for="consultDatetime">Date & Time</label>
+                <input id="consultDatetime" required type="datetime-local" name="datetime" />
+              </div>
+              <div class="form-row">
+                <label for="consultRate">Hourly rate (USD)</label>
+                <input id="consultRate" required type="number" min="1" step="1" name="rate" placeholder="200" />
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button class="btn primary" type="submit">✅ Request Booking</button>
+              <button class="btn subtle back" type="button">Back to Menu</button>
+            </div>
+            <p class="note">💳 Payment integration placeholder (Stripe/PayPal). Connect later.</p>
+          </form>
+        </div>
+
+        <!-- Live call placeholder (hidden until booking) -->
+        <div id="liveCallWindow" class="glass hidden">
+          <h3>📹 Live Call Window</h3>
+          <p class="muted">Placeholder for Zoom / FaceTime / Google Meet. Integrate your chosen SDK here.</p>
+          <div class="call-window">
+            <!-- placeholder iframe - swap for a proper meeting URL once integrated -->
+            <iframe src="about:blank" title="Video Call Placeholder"></iframe>
           </div>
-          <div class="form-row">
-            <label>Email</label>
-            <input required type="email" placeholder="you@example.com" name="email" />
+          <div style="margin-top:12px;">
+            <button class="btn primary" id="endCallBtn">End Call</button>
+            <button class="btn subtle" onclick="closeLiveCall()">Close</button>
           </div>
-          <div class="form-row">
-            <label>Preferred Platform</label>
-            <select name="platform">
-              <option>FaceTime</option>
-              <option>Zoom</option>
-              <option>Phone</option>
-              <option>Other</option>
-            </select>
-          </div>
-          <div class="form-row">
-            <label>Date & Time</label>
-            <input required type="datetime-local" name="datetime" />
-          </div>
-          <div class="form-row">
-            <label>Hourly rate (USD)</label>
-            <input required type="number" min="1" step="1" name="rate" placeholder="200" />
-          </div>
-          <div class="form-actions">
-            <button class="btn primary" type="submit">Request Booking</button>
-            <button class="btn subtle back" type="button">Back to Menu</button>
-          </div>
-          <p class="note">Payment integration placeholder (Stripe/PayPal). Connect later.</p>
-        </form>
+        </div>
       </section>
+
     </main>
   </div>
-        
 
+  <!-- jsPDF CDN for PDF export -->
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+
+  <!-- App logic -->
   <script src="script.js"></script>
 </body>
 </html>
