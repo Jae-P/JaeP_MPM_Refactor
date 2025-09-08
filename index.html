@@ -4,11 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Music Publishing Management App™</title>
-
-  <!-- Fonts: Inter for UI, Playfair Display for headings -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-
-  <!-- Styles -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -298,6 +294,8 @@
           </div>
         </div>
 
+        
+
         <div class="cards grid-3">
           <div class="step-card">
             <h4>1) Create Accounts</h4>
@@ -312,7 +310,6 @@
             <p>Update new releases, new collaborators, set lists for live shows, and cue sheets if applicable.</p>
           </div>
         </div>
-
         <div class="cards grid-2">
           <a class="link-card" href="https://www.bmi.com/join" target="_blank">Join BMI</a>
           <a class="link-card" href="https://www.ascap.com/join" target="_blank">Join ASCAP</a>
@@ -395,71 +392,66 @@
         </div>
       </section>
 
-      <!-- CONSULTATION -->
-      <section id="consultation" class="panel">
-        <div class="consult-card glass">
-          <h2>💬 Premium Consultation – Talk to Jae-P™</h2>
-          <p class="muted">Book your 1-on-1 call. Select platform, time, and confirm your rate.</p>
+     <!-- CONSULTATION -->
+<section id="consultation" class="panel">
+  <div class="consult-card glass">
+    <h2>💬 Premium Consultation – Talk to Jae-P™</h2>
+    <p class="muted">Book your 1-on-1 call. Select platform, time, and confirm your rate.</p>
 
-          <form id="consultForm" class="consult-form">
-            <div class="form-grid">
-              <div class="form-row">
-                <label for="consultName">Name</label>
-                <input id="consultName" required placeholder="Full name" name="name" />
-              </div>
-              <div class="form-row">
-                <label for="consultEmail">Email</label>
-                <input id="consultEmail" required type="email" placeholder="you@example.com" name="email" />
-              </div>
-              <div class="form-row">
-                <label for="consultPlatform">Preferred Platform</label>
-                <select id="consultPlatform" name="platform">
-                  <option>FaceTime</option>
-                  <option>Zoom</option>
-                  <option>Google Meet</option>
-                  <option>Phone</option>
-                  <option>Other</option>
-                </select>
-              </div>
-              <div class="form-row">
-                <label for="consultDatetime">Date & Time</label>
-                <input id="consultDatetime" required type="datetime-local" name="datetime" />
-              </div>
-              <div class="form-row">
-                <label for="consultRate">Hourly rate (USD)</label>
-                <input id="consultRate" required type="number" min="1" step="1" name="rate" placeholder="200" />
-              </div>
-            </div>
-
-            <div class="form-actions">
-              <button class="btn primary" type="submit">✅ Request Booking</button>
-              <button class="btn subtle back" type="button">Back to Menu</button>
-            </div>
-            <p class="note">💳 Payment integration placeholder (Stripe/PayPal). Connect later.</p>
-          </form>
+    <form id="consultForm" class="consult-form">
+      <div class="form-grid">
+        <div class="form-row">
+          <label for="consultName">Name</label>
+          <input id="consultName" required placeholder="Full name" name="name" />
         </div>
-
-        <!-- Live call placeholder (hidden until booking) -->
-        <div id="liveCallWindow" class="glass hidden">
-          <h3>📹 Live Call Window</h3>
-          <p class="muted">Placeholder for Zoom / FaceTime / Google Meet. Integrate your chosen SDK here.</p>
-          <div class="call-window">
-            <!-- placeholder iframe - swap for a proper meeting URL once integrated -->
-            <iframe src="about:blank" title="Video Call Placeholder"></iframe>
-          </div>
-          <div style="margin-top:12px;">
-            <button class="btn primary" id="endCallBtn">End Call</button>
-            <button class="btn subtle" onclick="closeLiveCall()">Close</button>
-          </div>
+        <div class="form-row">
+          <label for="consultEmail">Email</label>
+          <input id="consultEmail" required type="email" placeholder="you@example.com" name="email" />
         </div>
-      </section>
+        <div class="form-row">
+          <label for="consultPlatform">Preferred Platform</label>
+          <select id="consultPlatform" name="platform">
+            <option>FaceTime</option>
+            <option>Zoom</option>
+            <option>Phone</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label for="consultDatetime">Date & Time</label>
+          <input id="consultDatetime" required type="datetime-local" name="datetime" />
+        </div>
+        <div class="form-row">
+          <label for="consultRate">Hourly rate (USD)</label>
+          <input id="consultRate" required type="number" min="1" step="1" name="rate" placeholder="200" />
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn primary" type="submit">✅ Request Booking</button>
+        <button class="btn subtle back" type="button">Back to Menu</button>
+      </div>
+    </form> 
+
+    <!-- Stripe Buy Button Integration -->
+    <div class="payment-section">
+      <h3>Complete Payment</h3>
+      <script async src="https://js.stripe.com/v3/buy-button.js"></script>
+      <stripe-buy-button
+        buy-button-id="buy_btn_1S4IfvPz6Ke1Jos0FsYymlFZ"
+        publishable-key="pk_test_51RyyQqPz6Ke1Jos0E5cDMmfkxUo3RuQIJNqrUhLKmO0ZbJ8BHA5vK2c0J8C2wUHD4YQIs12zuWXP2GYXJv2nWaQQ00S6WCYs8d">
+      </stripe-buy-button>
+    </div>
+  </div>
+</section>
+
+
 
     </main>
   </div>
 
   <!-- jsPDF CDN for PDF export -->
   <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
-
   <!-- App logic -->
   <script src="script.js"></script>
 </body>
